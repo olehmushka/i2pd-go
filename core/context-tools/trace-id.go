@@ -7,10 +7,10 @@ import (
 	"fmt"
 )
 
-type key int
+type traceIDKey int
 
 const (
-	traceIDCtxKey key = iota
+	traceIDCtxKey traceIDKey = iota + 100
 )
 
 func AppendTraceID(ctx context.Context, traceID *traceid.TraceID) context.Context {

@@ -16,7 +16,12 @@ func TestDSA(t *testing.T) {
 	}
 
 	data := make([]byte, 512)
-	io.ReadFull(rand.Reader, data)
+	_, err = io.ReadFull(rand.Reader, data)
+	if err != nil {
+		t.Log(err)
+		t.Fail()
+	}
+
 	signed, err := Sign(ctx, sk, data)
 	if err != nil {
 		t.Log(err)
