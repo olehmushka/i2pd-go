@@ -18,6 +18,18 @@ func GenerateKeys(ctx context.Context) (*elgamal.PrivateKey, *elgamal.PublicKey,
 }
 
 func Encrypt(ctx context.Context, pubKey *elgamal.PublicKey, data []byte) ([]byte, error) {
+	var err error
+	for i := 0; i < 3; i++ {
+		enc, err := encrypt(ctx, pubKey, data)
+		if err == nil {
+			return enc, nil
+		}
+	}
+
+	return nil, err
+}
+
+func encrypt(ctx context.Context, pubKey *elgamal.PublicKey, data []byte) ([]byte, error) {
 	encrypter, err := createElgamalEncryption(ctx, pubKey, rand.Reader)
 	if err != nil {
 		panic(err.Error())

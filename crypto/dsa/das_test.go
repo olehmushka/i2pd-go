@@ -11,6 +11,7 @@ func TestDSA(t *testing.T) {
 	ctx := context.Background()
 	sk, pk, err := GenerateKeys(ctx)
 	if err != nil {
+		t.Log(err)
 		t.Fail()
 	}
 
@@ -18,10 +19,12 @@ func TestDSA(t *testing.T) {
 	io.ReadFull(rand.Reader, data)
 	signed, err := Sign(ctx, sk, data)
 	if err != nil {
+		t.Log(err)
 		t.Fail()
 	}
 
-	if err := Verify(ctx, pk, data, signed); err != nil {
+	if err = Verify(ctx, pk, data, signed); err != nil {
+		t.Log(err)
 		t.Fail()
 	}
 }

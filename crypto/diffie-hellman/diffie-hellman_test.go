@@ -32,7 +32,8 @@ func TestDiffieHellman(t *testing.T) {
 			for i := 0; i < tc.times; i++ {
 				keys, err := GenerateKeys(ctx, tc.generic)
 				if err != nil {
-					t.Fatalf("unexpected error: %+v", err)
+					t.Log(err)
+					t.Fail()
 				}
 
 				if !IsSecretEqual(keys.FirstParticipant.Secret, keys.SecondParticipant.Secret) {
