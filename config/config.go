@@ -2,13 +2,17 @@ package config
 
 import "context"
 
-type config struct{}
+type config struct {
+	cfg *ConfigStruct
+}
 
 func New() Config {
 	return &config{}
 }
 
 func (c *config) Init(ctx context.Context) error {
+	c.cfg = &ConfigStruct{}
+
 	return nil
 }
 
